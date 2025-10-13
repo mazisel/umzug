@@ -20,7 +20,7 @@ services:
       DB_NAME: ${DB_NAME:-umzug}
       JWT_SECRET_KEY: ${JWT_SECRET_KEY:-change-me-in-production}
     volumes:
-      - ./backend/uploads:/app/uploads
+      - ./backend/uploads:/app/backend/uploads
     depends_on:
       - mongo
     ports:
