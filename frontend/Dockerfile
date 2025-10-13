@@ -3,8 +3,7 @@ FROM node:20-bullseye-slim AS build
 WORKDIR /app
 
 ARG REACT_APP_BACKEND_URL=http://localhost:8001
-ENV REACT_APP_BACKEND_URL=${REACT_APP_BACKEND_URL} \
-    NODE_ENV=production
+ENV REACT_APP_BACKEND_URL=${REACT_APP_BACKEND_URL}
 
 # Install build dependencies required by CRA/Tailwind ecosystem
 RUN apt-get update && \
@@ -14,9 +13,9 @@ RUN apt-get update && \
 # Enable Yarn via Corepack (honours version from package.json)
 RUN corepack enable
 
-# Install dependencies
+# Install dependencies (include devDependencies for build)
 COPY package.json ./
-RUN yarn install --non-interactive
+RUN yarn install --non-interactive --production=false
 
 # Copy source code and build
 COPY public ./public
