@@ -14,10 +14,10 @@ import { useNavigate } from 'react-router-dom';
 
 const AdminSettings = () => {
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, loading: authLoading } = useAuth();
   const { settings, reload } = useSettings();
   const { toast } = useToast();
-  const [loading, setLoading] = useState(false);
+  const [saving, setSaving] = useState(false);
 
   const [companyData, setCompanyData] = useState({
     companyName: '',
@@ -37,12 +37,12 @@ const AdminSettings = () => {
   });
 
   useEffect(() => {
-    if (!user || user.role !== 'admin') {
-      navigate('/admin');
+    if (!authLoading && (!user || user.role !== 'admin')) {
+      navigate('/admin/login');
       return;
     }
 
-    if (settings) {
+    if (user && user.role === 'admin' && settings) {
       setCompanyData({
         companyName: settings.companyName || '',
         addresses: settings.addresses || []
@@ -50,14 +50,14 @@ const AdminSettings = () => {
       setThemeData(settings.theme || themeData);
       setTaxData(settings.tax || taxData);
     }
-  }, [settings, user, navigate]);
+  }, [settings, user, authLoading, navigate]);
 
   const handleLogoUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
 
     try {
-      setLoading(true);
+      setSaving(true);
       await companyService.uploadLogo(file);
       await reload();
       toast({
@@ -71,13 +71,13 @@ const AdminSettings = () => {
         variant: 'destructive',
       });
     } finally {
-      setLoading(false);
+      setSaving(false);
     }
   };
 
   const handleCompanyUpdate = async () => {
     try {
-      setLoading(true);
+      setSaving(true);
       await companyService.updateSettings(companyData);
       await reload();
       toast({
@@ -91,13 +91,13 @@ const AdminSettings = () => {
         variant: 'destructive',
       });
     } finally {
-      setLoading(false);
+      setSaving(false);
     }
   };
 
   const handleThemeUpdate = async () => {
     try {
-      setLoading(true);
+      setSaving(true);
       await companyService.updateTheme(themeData);
       await reload();
       toast({
@@ -111,13 +111,13 @@ const AdminSettings = () => {
         variant: 'destructive',
       });
     } finally {
-      setLoading(false);
+      setSaving(false);
     }
   };
 
   const handleTaxUpdate = async () => {
     try {
-      setLoading(true);
+      setSaving(true);
       await companyService.updateTax(taxData);
       await reload();
       toast({
@@ -131,9 +131,13 @@ const AdminSettings = () => {
         variant: 'destructive',
       });
     } finally {
-      setLoading(false);
+      setSaving(false);
     }
   };
+
+  if (authLoading || !user || user.role !== 'admin') {
+    return null;
+  }
 
   return (
     <div className="space-y-6">
@@ -184,7 +188,7 @@ const AdminSettings = () => {
                   type="file"
                   accept="image/*"
                   onChange={handleLogoUpload}
-                  disabled={loading}
+                  disabled={saving}
                 />
               </div>
             </CardContent>
@@ -204,7 +208,7 @@ const AdminSettings = () => {
                     placeholder="Gelbe-Umzüge"
                   />
                 </div>
-                <Button onClick={handleCompanyUpdate} disabled={loading}>
+        <Button onClick={handleCompanyUpdate} disabled={saving}>
                   Speichern
                 </Button>
               </div>
@@ -272,7 +276,7 @@ const AdminSettings = () => {
 
               <div className="pt-4 border-t">
                 <div className="flex gap-2">
-                  <Button onClick={handleThemeUpdate} disabled={loading}>
+                  <Button onClick={handleThemeUpdate} disabled={saving}>
                     Theme speichern
                   </Button>
                   <Button 
@@ -330,7 +334,7 @@ const AdminSettings = () => {
                 />
               </div>
 
-              <Button onClick={handleTaxUpdate} disabled={loading}>
+              <Button onClick={handleTaxUpdate} disabled={saving}>
                 MwSt-Einstellungen speichern
               </Button>
             </CardContent>

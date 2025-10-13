@@ -22,10 +22,10 @@ import {
 
 const AdminCategories = () => {
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, loading: authLoading } = useAuth();
   const { toast } = useToast();
   const [categories, setCategories] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [pageLoading, setPageLoading] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
   const [editingCategory, setEditingCategory] = useState(null);
   const [formData, setFormData] = useState({
@@ -40,16 +40,18 @@ const AdminCategories = () => {
   });
 
   useEffect(() => {
-    if (!user || user.role !== 'admin') {
-      navigate('/admin');
+    if (!authLoading && (!user || user.role !== 'admin')) {
+      navigate('/admin/login');
       return;
     }
-    loadCategories();
-  }, [user, navigate]);
+    if (user && user.role === 'admin') {
+      loadCategories();
+    }
+  }, [user, authLoading, navigate]);
 
   const loadCategories = async () => {
     try {
-      setLoading(true);
+      setPageLoading(true);
       const data = await categoryService.getAll(false);
       setCategories(data);
     } catch (error) {
@@ -59,7 +61,7 @@ const AdminCategories = () => {
         variant: 'destructive',
       });
     } finally {
-      setLoading(false);
+      setPageLoading(false);
     }
   };
 
@@ -95,7 +97,7 @@ const AdminCategories = () => {
 
   const handleSave = async () => {
     try {
-      setLoading(true);
+      setPageLoading(true);
       if (editingCategory) {
         await categoryService.update(editingCategory._id, formData);
         toast({
@@ -118,7 +120,7 @@ const AdminCategories = () => {
         variant: 'destructive',
       });
     } finally {
-      setLoading(false);
+      setPageLoading(false);
     }
   };
 
@@ -126,7 +128,7 @@ const AdminCategories = () => {
     if (!window.confirm('Sind Sie sicher, dass Sie diese Kategorie löschen möchten?')) return;
 
     try {
-      setLoading(true);
+      setPageLoading(true);
       await categoryService.delete(id);
       toast({
         title: 'Erfolg!',
@@ -140,9 +142,13 @@ const AdminCategories = () => {
         variant: 'destructive',
       });
     } finally {
-      setLoading(false);
+      setPageLoading(false);
     }
   };
+
+  if (authLoading || !user || user.role !== 'admin') {
+    return null;
+  }
 
   return (
     <div className="space-y-6">
@@ -312,7 +318,7 @@ const AdminCategories = () => {
             <Button variant="outline" onClick={() => setShowDialog(false)}>
               Abbrechen
             </Button>
-            <Button onClick={handleSave} disabled={loading}>
+            <Button onClick={handleSave} disabled={pageLoading}>
               {editingCategory ? 'Aktualisieren' : 'Erstellen'}
             </Button>
           </DialogFooter>

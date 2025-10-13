@@ -23,7 +23,7 @@ import {
 
 const AdminServices = () => {
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, loading: authLoading } = useAuth();
   const { toast } = useToast();
   const [services, setServices] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -43,12 +43,14 @@ const AdminServices = () => {
   });
 
   useEffect(() => {
-    if (!user || user.role !== 'admin') {
-      navigate('/admin');
+    if (!authLoading && (!user || user.role !== 'admin')) {
+      navigate('/admin/login');
       return;
     }
-    loadData();
-  }, [user, navigate]);
+    if (user && user.role === 'admin') {
+      loadData();
+    }
+  }, [user, authLoading, navigate]);
 
   const loadData = async () => {
     try {
@@ -152,6 +154,10 @@ const AdminServices = () => {
       setLoading(false);
     }
   };
+
+  if (authLoading || !user || user.role !== 'admin') {
+    return null;
+  }
 
   return (
     <div className="space-y-6">

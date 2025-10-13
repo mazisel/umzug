@@ -8,7 +8,7 @@ import { offerService } from '../services/offerService';
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const [stats, setStats] = useState({
     totalOffers: 0,
     monthlyOffers: 0,
@@ -19,13 +19,15 @@ const AdminDashboard = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!user) {
+    if (!loading && !user) {
       navigate('/admin/login');
       return;
     }
 
-    loadData();
-  }, [user, navigate]);
+    if (user) {
+      loadData();
+    }
+  }, [user, loading, navigate]);
 
   const loadData = async () => {
     try {
@@ -62,6 +64,10 @@ const AdminDashboard = () => {
       setLoading(false);
     }
   };
+
+  if (loading) {
+    return null;
+  }
 
   if (!user) {
     return null;

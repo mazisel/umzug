@@ -21,7 +21,7 @@ import {
 
 const AdminCustomers = () => {
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, loading: authLoading } = useAuth();
   const { toast } = useToast();
   const [customers, setCustomers] = useState([]);
   const [filteredCustomers, setFilteredCustomers] = useState([]);
@@ -45,12 +45,14 @@ const AdminCustomers = () => {
   });
 
   useEffect(() => {
-    if (!user || user.role !== 'admin') {
-      navigate('/admin');
+    if (!authLoading && (!user || user.role !== 'admin')) {
+      navigate('/admin/login');
       return;
     }
-    loadCustomers();
-  }, [user, navigate]);
+    if (user && user.role === 'admin') {
+      loadCustomers();
+    }
+  }, [user, authLoading, navigate]);
 
   useEffect(() => {
     if (searchTerm) {
@@ -166,6 +168,10 @@ const AdminCustomers = () => {
       setLoading(false);
     }
   };
+
+  if (authLoading || !user || user.role !== 'admin') {
+    return null;
+  }
 
   return (
     <div className="space-y-6">
