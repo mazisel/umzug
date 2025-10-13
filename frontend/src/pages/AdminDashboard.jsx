@@ -8,7 +8,7 @@ import { offerService } from '../services/offerService';
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
-  const { user, loading } = useAuth();
+  const { user, loading: authLoading } = useAuth();
   const [stats, setStats] = useState({
     totalOffers: 0,
     monthlyOffers: 0,
@@ -16,10 +16,10 @@ const AdminDashboard = () => {
     pendingOffers: 0
   });
   const [recentOffers, setRecentOffers] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (!loading && !user) {
+    if (!authLoading && !user) {
       navigate('/admin/login');
       return;
     }
@@ -27,11 +27,11 @@ const AdminDashboard = () => {
     if (user) {
       loadData();
     }
-  }, [user, loading, navigate]);
+  }, [user, authLoading, navigate]);
 
   const loadData = async () => {
     try {
-      setLoading(true);
+      setIsLoading(true);
       const offers = await offerService.getAll();
       
       // Calculate stats
@@ -61,11 +61,11 @@ const AdminDashboard = () => {
     } catch (error) {
       console.error('Failed to load dashboard data:', error);
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   };
 
-  if (loading) {
+  if (authLoading || isLoading) {
     return null;
   }
 

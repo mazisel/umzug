@@ -20,14 +20,14 @@ import {
 
 const AdminOffers = () => {
   const navigate = useNavigate();
-  const { user, loading } = useAuth();
+  const { user, loading: authLoading } = useAuth();
   const [offers, setOffers] = useState([]);
   const [filteredOffers, setFilteredOffers] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [deleteId, setDeleteId] = useState(null);
 
   useEffect(() => {
-    if (!loading && !user) {
+    if (!authLoading && !user) {
       navigate('/admin/login');
       return;
     }
@@ -35,7 +35,7 @@ const AdminOffers = () => {
     if (user) {
       loadOffers();
     }
-  }, [user, loading, navigate]);
+  }, [user, authLoading, navigate]);
 
   useEffect(() => {
     if (searchTerm) {
@@ -71,7 +71,7 @@ const AdminOffers = () => {
     }
   };
 
-  if (loading) {
+  if (authLoading) {
     return null;
   }
 

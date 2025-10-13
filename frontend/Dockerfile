@@ -14,7 +14,7 @@ RUN apt-get update && \
 RUN corepack enable
 
 # Install dependencies (include devDependencies for build)
-COPY package.json ./
+COPY package.json yarn.lock ./
 RUN yarn install --non-interactive --production=false
 
 # Copy source code and build

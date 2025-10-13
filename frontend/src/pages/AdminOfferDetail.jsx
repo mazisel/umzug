@@ -22,20 +22,20 @@ import {
 const AdminOfferDetail = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { user, loading } = useAuth();
+  const { user, loading: authLoading } = useAuth();
   const [offer, setOffer] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
 
   useEffect(() => {
-    if (!loading && !user) {
+    if (!authLoading && !user) {
       navigate('/admin/login');
       return;
     }
     if (user) {
       loadOffer();
     }
-  }, [user, loading, id, navigate]);
+  }, [user, authLoading, id, navigate]);
 
   const loadOffer = () => {
     const savedOffers = localStorage.getItem('offers');
@@ -78,7 +78,7 @@ const AdminOfferDetail = () => {
     window.print();
   };
 
-  if (loading) {
+  if (authLoading) {
     return null;
   }
 
