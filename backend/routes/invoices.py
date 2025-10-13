@@ -4,7 +4,7 @@ from bson import ObjectId
 from datetime import datetime
 
 from models.invoice import Invoice, InvoiceCreate, InvoiceUpdate, InvoiceItem
-from routes.auth import get_current_user
+from .auth import get_current_user
 
 router = APIRouter(prefix="/invoices", tags=["Invoices"])
 

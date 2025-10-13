@@ -4,7 +4,7 @@ from bson import ObjectId
 from datetime import datetime
 
 from models.service_category import ServiceCategory, ServiceCategoryCreate, ServiceCategoryUpdate
-from routes.auth import get_current_user
+from .auth import get_current_user
 
 router = APIRouter(prefix="/categories", tags=["Service Categories"])
 

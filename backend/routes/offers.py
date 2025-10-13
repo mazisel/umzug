@@ -4,7 +4,7 @@ from bson import ObjectId
 from datetime import datetime
 
 from models.offer import Offer, OfferCreate, OfferUpdate, Pricing
-from routes.auth import get_current_user
+from .auth import get_current_user
 
 router = APIRouter(prefix="/offers", tags=["Offers"])
 

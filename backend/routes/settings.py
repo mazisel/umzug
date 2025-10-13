@@ -5,7 +5,7 @@ import shutil
 from datetime import datetime
 
 from models.company_settings import CompanySettings, Theme, TaxSettings, EmailSettings, Address
-from routes.auth import get_current_user
+from .auth import get_current_user
 
 router = APIRouter(prefix="/settings", tags=["Settings"])
 

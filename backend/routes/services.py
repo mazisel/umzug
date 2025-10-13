@@ -4,7 +4,7 @@ from bson import ObjectId
 from datetime import datetime
 
 from models.additional_service import AdditionalService, AdditionalServiceCreate, AdditionalServiceUpdate
-from routes.auth import get_current_user
+from .auth import get_current_user
 
 router = APIRouter(prefix="/services", tags=["Additional Services"])
 

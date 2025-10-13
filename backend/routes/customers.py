@@ -4,7 +4,7 @@ from bson import ObjectId
 from datetime import datetime
 
 from models.customer import Customer, CustomerCreate, CustomerUpdate
-from routes.auth import get_current_user
+from .auth import get_current_user
 
 router = APIRouter(prefix="/customers", tags=["Customers"])
 
