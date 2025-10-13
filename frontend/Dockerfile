@@ -9,8 +9,8 @@ ENV REACT_APP_BACKEND_URL=${REACT_APP_BACKEND_URL} \
 # Install build dependencies for native modules
 RUN apk add --no-cache python3 make g++ bash
 
-# Prepare Yarn 1.x
-RUN corepack enable && corepack prepare yarn@1.22.22 --activate
+# Install Yarn 1.x globally (corepack alone can fail in non-interactive builds)
+RUN npm install -g yarn@1.22.22
 
 # Install dependencies
 COPY package.json ./
