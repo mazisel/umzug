@@ -8,6 +8,7 @@ import { Switch } from '../components/ui/switch';
 import { useAuth } from '../context/AuthContext';
 import { useSettings } from '../context/SettingsContext';
 import { companyService } from '../services/companyService';
+import { BACKEND_URL } from '../services/api';
 import { Building2, Palette, Mail, Receipt, Upload } from 'lucide-react';
 import { useToast } from '../hooks/use-toast';
 import { useNavigate } from 'react-router-dom';
@@ -176,9 +177,9 @@ const AdminSettings = () => {
             <CardContent className="space-y-4">
               {settings?.logo && (
                 <div className="mb-4">
-                  <img 
-                    src={`${process.env.REACT_APP_BACKEND_URL}${settings.logo}`} 
-                    alt="Company Logo" 
+                  <img
+                    src={`${BACKEND_URL}${settings.logo}`}
+                    alt="Company Logo"
                     className="h-20 object-contain"
                   />
                 </div>

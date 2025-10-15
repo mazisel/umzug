@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import "./App.css";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { BACKEND_URL } from "./services/api";
 import { Button } from "./components/ui/button";
 import { FileText, Plus, Package, LayoutDashboard } from "lucide-react";
 import { AuthProvider } from "./context/AuthContext";
@@ -21,7 +22,6 @@ import AdminCustomers from "./pages/AdminCustomers";
 import { useTranslation } from 'react-i18next';
 import './i18n/i18n'; // Initialize i18n
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
 const Home = () => {

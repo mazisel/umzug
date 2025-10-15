@@ -1,6 +1,16 @@
 import axios from 'axios';
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
+const resolveBackendUrl = () => {
+  if (process.env.REACT_APP_BACKEND_URL) {
+    return process.env.REACT_APP_BACKEND_URL;
+  }
+  if (typeof window !== 'undefined' && window.location?.origin) {
+    return window.location.origin;
+  }
+  return 'http://localhost:8001';
+};
+
+export const BACKEND_URL = resolveBackendUrl().replace(/\/$/, '');
 const API_URL = `${BACKEND_URL}/api`;
 
 // Create axios instance
