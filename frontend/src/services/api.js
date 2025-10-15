@@ -13,6 +13,7 @@ const resolveBackendUrl = () => {
 
   if (typeof window !== 'undefined' && window.location?.origin) {
     const windowOrigin = window.location.origin;
+    const windowIsLocal = LOCAL_HOSTNAMES.has(window.location.hostname);
 
     if (!buildTimeUrl) {
       return windowOrigin;
@@ -20,23 +21,24 @@ const resolveBackendUrl = () => {
 
     try {
       const parsedUrl = new URL(buildTimeUrl);
-      const isLocalTarget = LOCAL_HOSTNAMES.has(parsedUrl.hostname);
-      const isLocalWindow = LOCAL_HOSTNAMES.has(window.location.hostname);
+      const targetIsLocal = LOCAL_HOSTNAMES.has(parsedUrl.hostname);
 
-      if (!isLocalTarget && !isLocalWindow) {
-        const sameHost = parsedUrl.hostname === window.location.hostname;
-        if (sameHost) {
-          const targetPort = parsedUrl.port || defaultPort(parsedUrl.protocol);
-          const windowPort = window.location.port || defaultPort(window.location.protocol);
-          const sameProtocol = parsedUrl.protocol === window.location.protocol;
-
-          if (!sameProtocol || targetPort !== windowPort) {
-            return windowOrigin;
-          }
-        }
+      if (targetIsLocal || windowIsLocal) {
+        return parsedUrl.origin;
       }
 
-      return parsedUrl.origin;
+      const targetPort = parsedUrl.port || defaultPort(parsedUrl.protocol);
+      const windowPort = window.location.port || defaultPort(window.location.protocol);
+      const sameOrigin =
+        parsedUrl.protocol === window.location.protocol &&
+        parsedUrl.hostname === window.location.hostname &&
+        targetPort === windowPort;
+
+      if (sameOrigin) {
+        return parsedUrl.origin;
+      }
+
+      return windowOrigin;
     } catch (error) {
       return windowOrigin;
     }
