@@ -6,6 +6,7 @@ from motor.motor_asyncio import AsyncIOMotorClient
 import os
 import logging
 from pathlib import Path
+from utils.auth import get_password_hash
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -73,6 +74,31 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
+
+DEFAULT_ADMIN_USERNAME = os.getenv("DEFAULT_ADMIN_USERNAME", "admin")
+DEFAULT_ADMIN_PASSWORD = os.getenv("DEFAULT_ADMIN_PASSWORD", "admin123")
+DEFAULT_ADMIN_EMAIL = os.getenv("DEFAULT_ADMIN_EMAIL", "admin@example.com")
+
+async def ensure_default_admin_user():
+    """Ensure there is at least one admin user present."""
+    existing_admin = await db.users.find_one({"username": DEFAULT_ADMIN_USERNAME})
+    if existing_admin:
+        return
+
+    admin_user = {
+        "username": DEFAULT_ADMIN_USERNAME,
+        "email": DEFAULT_ADMIN_EMAIL,
+        "passwordHash": get_password_hash(DEFAULT_ADMIN_PASSWORD),
+        "name": "Administrator",
+        "role": "admin",
+        "active": True
+    }
+    await db.users.insert_one(admin_user)
+    logger.info("Default admin user created (username: %s)", DEFAULT_ADMIN_USERNAME)
+
+@app.on_event("startup")
+async def startup_event():
+    await ensure_default_admin_user()
 
 @app.on_event("shutdown")
 async def shutdown_db_client():
