@@ -89,8 +89,8 @@ const AdminOfferDetail = () => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-4">
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+        <div className="flex flex-col gap-3 md:flex-row md:items-center md:gap-4">
           <Button
             variant="ghost"
             onClick={() => navigate('/admin/offers')}
@@ -103,18 +103,18 @@ const AdminOfferDetail = () => {
             <h1 className="text-3xl font-bold text-gray-900">
               Offerte #{offer.offerNumber}
             </h1>
-            <p className="text-gray-600 mt-1">
+            <p className="mt-1 text-gray-600">
               {offer.currentLocation.customer.firstName} {offer.currentLocation.customer.lastName}
             </p>
           </div>
         </div>
-        <div className="flex gap-2 print:hidden">
+        <div className="flex flex-wrap gap-2 print:hidden">
           {!isEditing && (
             <>
               <Button
                 onClick={() => setIsEditing(true)}
                 variant="outline"
-                className="gap-2"
+                className="gap-2 w-full sm:w-auto"
               >
                 <Edit className="w-4 h-4" />
                 Bearbeiten
@@ -122,7 +122,7 @@ const AdminOfferDetail = () => {
               <Button
                 onClick={handlePrint}
                 variant="outline"
-                className="gap-2"
+                className="gap-2 w-full sm:w-auto"
               >
                 <Printer className="w-4 h-4" />
                 Drucken
@@ -130,7 +130,7 @@ const AdminOfferDetail = () => {
               <Button
                 onClick={() => setShowDeleteDialog(true)}
                 variant="destructive"
-                className="gap-2"
+                className="gap-2 w-full sm:w-auto"
               >
                 <Trash2 className="w-4 h-4" />
                 Löschen

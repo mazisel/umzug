@@ -175,12 +175,12 @@ const AdminCustomers = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
           <h1 className="text-3xl font-bold text-gray-900">Kunden</h1>
           <p className="text-gray-600 mt-2">{filteredCustomers.length} Kunden gefunden</p>
         </div>
-        <Button onClick={handleCreate} className="bg-yellow-500 hover:bg-yellow-600 text-black gap-2">
+        <Button onClick={handleCreate} className="bg-yellow-500 hover:bg-yellow-600 text-black gap-2 w-full md:w-auto">
           <Plus className="w-4 h-4" />
           Neuer Kunde
         </Button>
@@ -206,13 +206,13 @@ const AdminCustomers = () => {
         {filteredCustomers.map((customer) => (
           <Card key={customer._id} className="hover:shadow-lg transition-all">
             <CardContent className="p-6">
-              <div className="flex items-start justify-between">
-                <div className="flex gap-4 flex-1">
+              <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
+                <div className="flex flex-1 flex-col gap-4 sm:flex-row">
                   <div className="bg-green-100 p-3 rounded-lg">
                     <Users className="w-8 h-8 text-green-600" />
                   </div>
                   <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-2">
+                    <div className="mb-2 flex flex-wrap items-center gap-2">
                       <h3 className="text-xl font-bold">
                         {customer.salutation} {customer.firstName} {customer.lastName}
                       </h3>
@@ -221,7 +221,7 @@ const AdminCustomers = () => {
                         {customer.active ? 'Aktiv' : 'Inaktiv'}
                       </Badge>
                     </div>
-                    <div className="grid grid-cols-3 gap-4 text-sm text-gray-600">
+                    <div className="grid gap-4 text-sm text-gray-600 sm:grid-cols-2 xl:grid-cols-3">
                       <div>
                         <p className="font-semibold text-gray-900">Kontakt</p>
                         <p>{customer.email}</p>
@@ -244,12 +244,12 @@ const AdminCustomers = () => {
                     )}
                   </div>
                 </div>
-                <div className="flex gap-2">
+                <div className="flex flex-wrap gap-2">
                   <Button
                     onClick={() => handleEdit(customer)}
                     variant="outline"
                     size="sm"
-                    className="gap-2"
+                    className="gap-2 w-full sm:w-auto"
                   >
                     <Edit className="w-4 h-4" />
                     Bearbeiten
@@ -258,7 +258,7 @@ const AdminCustomers = () => {
                     onClick={() => handleDelete(customer._id)}
                     variant="destructive"
                     size="sm"
-                    className="gap-2"
+                    className="gap-2 w-full sm:w-auto"
                   >
                     <Trash2 className="w-4 h-4" />
                     Löschen
@@ -277,7 +277,7 @@ const AdminCustomers = () => {
                 {searchTerm ? 'Keine Kunden gefunden' : 'Noch keine Kunden vorhanden'}
               </p>
               {!searchTerm && (
-                <Button onClick={handleCreate} className="bg-yellow-500 hover:bg-yellow-600 text-black gap-2">
+                <Button onClick={handleCreate} className="bg-yellow-500 hover:bg-yellow-600 text-black gap-2 w-full sm:w-auto">
                   <Plus className="w-4 h-4" />
                   Ersten Kunden erstellen
                 </Button>
@@ -300,7 +300,7 @@ const AdminCustomers = () => {
           </DialogHeader>
 
           <div className="space-y-4 py-4">
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
               <div>
                 <Label>Anrede *</Label>
                 <select
@@ -330,7 +330,7 @@ const AdminCustomers = () => {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid gap-4 md:grid-cols-2">
               <div>
                 <Label>E-Mail *</Label>
                 <Input
@@ -359,7 +359,7 @@ const AdminCustomers = () => {
               />
             </div>
 
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
               <div>
                 <Label>PLZ *</Label>
                 <Input

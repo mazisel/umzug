@@ -51,8 +51,8 @@ const OfferPage = () => {
     <div className="container mx-auto py-8 px-4">
       {/* Tabs */}
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <div className="flex justify-between items-center mb-6">
-          <TabsList className="grid w-full max-w-md grid-cols-2">
+        <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+          <TabsList className="grid w-full max-w-md grid-cols-2 gap-2">
             <TabsTrigger value="create" className="gap-2">
               <FileText className="w-4 h-4" />
               {t('offer.create')}
@@ -64,7 +64,7 @@ const OfferPage = () => {
           </TabsList>
           
           {activeTab === 'create' && (
-            <Button onClick={handleUseMockData} variant="outline" className="gap-2">
+            <Button onClick={handleUseMockData} variant="outline" className="gap-2 w-full md:w-auto">
               <FileText className="w-4 h-4" />
               {t('offer.loadExample')}
             </Button>
@@ -80,8 +80,8 @@ const OfferPage = () => {
         <TabsContent value="preview" className="mt-6">
           {currentOffer && (
             <div>
-              <div className="flex justify-end mb-4 print:hidden">
-                <Button onClick={handlePrint} className="gap-2 bg-yellow-500 hover:bg-yellow-600 text-black">
+              <div className="mb-4 flex flex-col gap-3 print:hidden md:flex-row md:justify-end">
+                <Button onClick={handlePrint} className="gap-2 bg-yellow-500 hover:bg-yellow-600 text-black md:self-end">
                   <Download className="w-4 h-4" />
                   {t('offer.print')}
                 </Button>

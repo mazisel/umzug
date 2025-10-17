@@ -208,7 +208,7 @@ const OfferForm = ({ onSubmit, initialData }) => {
             )}
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid gap-4 md:grid-cols-2">
             <div>
               <Label htmlFor="offerNumber">Offert Nr.</Label>
               <Input
@@ -284,7 +284,7 @@ const OfferForm = ({ onSubmit, initialData }) => {
               ✓ Kundendaten aus Datenbank geladen. Zum Ändern, wählen Sie "Neuer Kunde" aus.
             </div>
           )}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid gap-4 md:grid-cols-2">
             <div>
               <Label>Anrede</Label>
               <Input
@@ -375,8 +375,8 @@ const OfferForm = ({ onSubmit, initialData }) => {
             />
             <Label htmlFor="newElevator">Lift vorhanden</Label>
           </div>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="col-span-2">
+          <div className="grid gap-4 md:grid-cols-2">
+            <div className="md:col-span-2">
               <Label>Strasse</Label>
               <Input
                 value={formData.newLocation.street}
@@ -409,7 +409,7 @@ const OfferForm = ({ onSubmit, initialData }) => {
           <CardTitle>Umzugsdetails</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid gap-4 md:grid-cols-2">
             <div>
               <Label>Umzugstermin</Label>
               <Input
@@ -442,7 +442,7 @@ const OfferForm = ({ onSubmit, initialData }) => {
                 placeholder="offen"
               />
             </div>
-            <div className="col-span-2">
+            <div className="md:col-span-2">
               <Label>Objekt</Label>
               <Input
                 value={formData.movingDetails.object}
@@ -459,7 +459,7 @@ const OfferForm = ({ onSubmit, initialData }) => {
           <CardTitle>Umzugsleistungen</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid gap-4 md:grid-cols-2">
             <div>
               <Label>Umzugswagen (Anzahl)</Label>
               <Input
@@ -478,7 +478,7 @@ const OfferForm = ({ onSubmit, initialData }) => {
                 min="1"
               />
             </div>
-            <div className="col-span-2">
+            <div className="md:col-span-2">
               <Label>Umzugskisten</Label>
               <Input
                 value={formData.services.movingBoxes}
@@ -486,7 +486,7 @@ const OfferForm = ({ onSubmit, initialData }) => {
                 placeholder="20 Umzugskisten Kostenlos zur Verfügung"
               />
             </div>
-            <div className="col-span-2">
+            <div className="md:col-span-2">
               <Label>De/Montage</Label>
               <Input
                 value={formData.services.assembly}
@@ -518,7 +518,7 @@ const OfferForm = ({ onSubmit, initialData }) => {
           ) : (
             <div className="space-y-4">
               {formData.additionalServices.map((service, index) => (
-                <div key={service.serviceId} className="flex items-center justify-between p-3 border rounded hover:bg-gray-50 transition-all">
+                <div key={service.serviceId} className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between p-3 border rounded hover:bg-gray-50 transition-all">
                   <div className="flex items-center space-x-3 flex-1">
                     <Switch
                       id={service.serviceId}
@@ -541,11 +541,11 @@ const OfferForm = ({ onSubmit, initialData }) => {
                     </div>
                   </div>
                   {service.selected && (
-                    <div className="flex items-center gap-3">
+                    <div className="flex flex-col gap-2 md:flex-row md:items-center md:gap-3">
                       <div className="text-right">
                         <p className="text-sm text-gray-600 font-medium">Preis:</p>
                       </div>
-                      <div className="w-32">
+                      <div className="w-full md:w-32">
                         <Input
                           type="number"
                           step="0.01"

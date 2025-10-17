@@ -1,11 +1,10 @@
 import React from 'react';
-import { Card } from './ui/card';
 import { Separator } from './ui/separator';
 import { CheckSquare, Square } from 'lucide-react';
 
 const OfferDocument = ({ offer, companyInfo, terms }) => {
   return (
-    <div className="bg-white text-black min-h-screen p-8">
+    <div className="min-h-screen bg-white p-4 text-black sm:p-8">
       <div className="max-w-5xl mx-auto">
         {/* Header with Logo and Company Info */}
         <div className="relative mb-8">
@@ -15,12 +14,12 @@ const OfferDocument = ({ offer, companyInfo, terms }) => {
             <div className="h-2 bg-yellow-400 flex-1"></div>
           </div>
 
-          <div className="flex justify-between items-start">
+          <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
             {/* Logo Section */}
             <div className="flex-1">
               <div className="flex items-center gap-3 mb-6">
                 <div className="bg-black p-3 rounded">
-                  <svg className="w-16 h-16 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <svg className="w-12 h-12 text-white sm:h-16 sm:w-16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                     <path d="M5 17h14v-5l-1.5-4.5h-11L5 12v5z"/>
                     <path d="M5 17v-5l-2 1v4h2z"/>
                     <circle cx="7" cy="17" r="2"/>
@@ -28,7 +27,7 @@ const OfferDocument = ({ offer, companyInfo, terms }) => {
                     <path d="M7 8h6v-3h-6v3z"/>
                   </svg>
                 </div>
-                <h1 className="text-3xl font-bold">
+                <h1 className="text-2xl font-bold sm:text-3xl">
                   <span className="text-yellow-500">GELBE</span>
                   <span className="text-black">-UMZÜGE</span>
                 </h1>
@@ -36,7 +35,7 @@ const OfferDocument = ({ offer, companyInfo, terms }) => {
             </div>
 
             {/* Company Contact - Right Side */}
-            <div className="text-right text-sm">
+            <div className="text-sm text-left md:text-right">
               <p className="font-bold">{companyInfo.hauptsitz.title}</p>
               <p className="font-semibold">{companyInfo.hauptsitz.company}</p>
               <p>{companyInfo.hauptsitz.street}</p>
@@ -49,14 +48,26 @@ const OfferDocument = ({ offer, companyInfo, terms }) => {
         </div>
 
         {/* Offer Details */}
-        <div className="grid grid-cols-2 gap-8 mb-6">
-          <div className="space-y-1 text-sm">
-            <div className="flex"><span className="font-semibold w-48">Offert Nr.</span><span>{offer.offerNumber}</span></div>
-            <div className="flex"><span className="font-semibold w-48">Offertdatum</span><span>{offer.offerDate}</span></div>
-            <div className="flex"><span className="font-semibold w-48">Ihre Kundennummer</span><span>{offer.customerNumber}</span></div>
-            <div className="flex"><span className="font-semibold w-48">Ihr Ansprechpartner</span><span>{offer.contactPerson}</span></div>
+        <div className="grid gap-6 mb-6 text-sm md:grid-cols-2">
+          <div className="space-y-1">
+            <div className="flex flex-col gap-1 sm:flex-row">
+              <span className="font-semibold sm:w-48">Offert Nr.</span>
+              <span>{offer.offerNumber}</span>
+            </div>
+            <div className="flex flex-col gap-1 sm:flex-row">
+              <span className="font-semibold sm:w-48">Offertdatum</span>
+              <span>{offer.offerDate}</span>
+            </div>
+            <div className="flex flex-col gap-1 sm:flex-row">
+              <span className="font-semibold sm:w-48">Ihre Kundennummer</span>
+              <span>{offer.customerNumber}</span>
+            </div>
+            <div className="flex flex-col gap-1 sm:flex-row">
+              <span className="font-semibold sm:w-48">Ihr Ansprechpartner</span>
+              <span>{offer.contactPerson}</span>
+            </div>
           </div>
-          <div className="text-right text-sm">
+          <div className="text-left md:text-right">
             <p className="font-semibold">{companyInfo.branch.company}</p>
             <p>{companyInfo.branch.street}</p>
             <p>{companyInfo.branch.city}</p>
@@ -66,7 +77,7 @@ const OfferDocument = ({ offer, companyInfo, terms }) => {
         </div>
 
         {/* Current and New Location */}
-        <div className="grid grid-cols-2 gap-8 mb-8">
+        <div className="grid gap-6 mb-8 md:grid-cols-2">
           <div>
             <h3 className="font-bold mb-2">Aktueller Standort:</h3>
             <p className="text-sm mb-2">__ Meter zur Ladekante, Lift: {offer.currentLocation.hasElevator ? 'Ja' : 'Nein'}</p>
@@ -97,34 +108,52 @@ const OfferDocument = ({ offer, companyInfo, terms }) => {
         <p className="mb-6">Vielen Dank für Ihre Anfrage. Ich freue mich, Ihnen die folgende Offerte unterbreiten zu können:</p>
 
         {/* Moving Details */}
-        <div className="mb-6 space-y-1">
-          <div className="flex"><span className="font-semibold w-48">Umzugstermin:</span><span>{offer.movingDetails.movingDate}</span></div>
-          <div className="flex"><span className="font-semibold w-48">Arbeitsbeginn:</span><span>{offer.movingDetails.startTime}</span></div>
-          <div className="h-4"></div>
-          <div className="flex"><span className="font-semibold w-48">Reinigungstermin:</span><span>{offer.movingDetails.cleaningDate || 'offen'}</span></div>
-          <div className="flex"><span className="font-semibold w-48">Arbeitsbeginn:</span><span>{offer.movingDetails.cleaningStartTime || 'offen'}</span></div>
-          <div className="flex"><span className="font-semibold w-48">Abgabe:</span></div>
-          <div className="h-2"></div>
-          <div className="flex"><span className="font-semibold w-48">Objekt:</span><span>{offer.movingDetails.object}</span></div>
+        <div className="mb-6 space-y-3">
+          <div className="flex flex-col gap-1 sm:flex-row sm:gap-2">
+            <span className="font-semibold sm:w-48">Umzugstermin:</span>
+            <span>{offer.movingDetails.movingDate}</span>
+          </div>
+          <div className="flex flex-col gap-1 sm:flex-row sm:gap-2">
+            <span className="font-semibold sm:w-48">Arbeitsbeginn:</span>
+            <span>{offer.movingDetails.startTime}</span>
+          </div>
+          <div className="flex flex-col gap-1 sm:flex-row sm:gap-2">
+            <span className="font-semibold sm:w-48">Reinigungstermin:</span>
+            <span>{offer.movingDetails.cleaningDate || 'offen'}</span>
+          </div>
+          <div className="flex flex-col gap-1 sm:flex-row sm:gap-2">
+            <span className="font-semibold sm:w-48">Reinigung Arbeitsbeginn:</span>
+            <span>{offer.movingDetails.cleaningStartTime || 'offen'}</span>
+          </div>
+          <div className="flex flex-col gap-1 sm:flex-row sm:gap-2">
+            <span className="font-semibold sm:w-48">Abgabe:</span>
+            <span>{offer.movingDetails.delivery || '—'}</span>
+          </div>
+          <div className="flex flex-col gap-1 sm:flex-row sm:gap-2">
+            <span className="font-semibold sm:w-48">Objekt:</span>
+            <span>{offer.movingDetails.object}</span>
+          </div>
         </div>
 
         {/* Moving Services Table */}
-        <div className="border border-gray-300 mb-6">
-          <div className="bg-gray-100 px-4 py-2 font-bold border-b border-gray-300">Umzug:</div>
-          <div className="grid grid-cols-[2fr,1fr,3fr,2fr] text-sm">
-            <div className="px-4 py-2 border-b border-r border-gray-300">Umzugswagen:</div>
-            <div className="px-4 py-2 border-b border-r border-gray-300">{offer.services.movingTrucks}</div>
-            <div className="px-4 py-2 border-b border-r border-gray-300 font-semibold">Pauschalpreis Umzug:</div>
-            <div className="px-4 py-2 border-b border-gray-300 text-right font-semibold">CHF {offer.services.movingPrice}</div>
-            
-            <div className="px-4 py-2 border-b border-r border-gray-300">Umzugsmitarbeiter:</div>
-            <div className="px-4 py-2 border-b border-r border-gray-300">{offer.services.movingWorkers}</div>
-            <div className="px-4 py-2 border-b border-r border-gray-300"></div>
-            <div className="px-4 py-2 border-b border-gray-300"></div>
-            
-            <div className="px-4 py-2 border-r border-gray-300" style={{gridColumn: 'span 2'}}>{offer.services.movingBoxes}</div>
-            <div className="px-4 py-2 border-r border-gray-300">{offer.services.assembly}</div>
-            <div className="px-4 py-2"></div>
+        <div className="mb-6 overflow-x-auto">
+          <div className="min-w-[560px] border border-gray-300">
+            <div className="bg-gray-100 px-4 py-2 font-bold border-b border-gray-300">Umzug:</div>
+            <div className="grid grid-cols-[2fr,1fr,3fr,2fr] text-sm">
+              <div className="px-4 py-2 border-b border-r border-gray-300">Umzugswagen:</div>
+              <div className="px-4 py-2 border-b border-r border-gray-300">{offer.services.movingTrucks}</div>
+              <div className="px-4 py-2 border-b border-r border-gray-300 font-semibold">Pauschalpreis Umzug:</div>
+              <div className="px-4 py-2 border-b border-gray-300 text-right font-semibold">CHF {offer.services.movingPrice}</div>
+              
+              <div className="px-4 py-2 border-b border-r border-gray-300">Umzugsmitarbeiter:</div>
+              <div className="px-4 py-2 border-b border-r border-gray-300">{offer.services.movingWorkers}</div>
+              <div className="px-4 py-2 border-b border-r border-gray-300"></div>
+              <div className="px-4 py-2 border-b border-gray-300"></div>
+              
+              <div className="px-4 py-2 border-r border-gray-300" style={{gridColumn: 'span 2'}}>{offer.services.movingBoxes}</div>
+              <div className="px-4 py-2 border-r border-gray-300">{offer.services.assembly}</div>
+              <div className="px-4 py-2"></div>
+            </div>
           </div>
         </div>
 
@@ -132,8 +161,8 @@ const OfferDocument = ({ offer, companyInfo, terms }) => {
         <div className="space-y-4 mb-6">
           {offer.additionalServices && Array.isArray(offer.additionalServices) && offer.additionalServices.length > 0 ? (
             offer.additionalServices.map((service, index) => (
-              <div key={index} className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
+              <div key={index} className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+                <div className="flex flex-wrap items-center gap-3">
                   <span className="font-semibold">{service.name}:</span>
                   <div className="flex items-center gap-2">
                     {service.selected ? 
@@ -151,7 +180,7 @@ const OfferDocument = ({ offer, companyInfo, terms }) => {
                   </div>
                 </div>
                 {service.selected && (
-                  <div className="font-semibold">
+                  <div className="font-semibold text-left md:text-right">
                     Pauschalpreis {service.name} <span className="ml-4">CHF {typeof service.price === 'number' ? service.price.toFixed(2) : service.price}</span>
                   </div>
                 )}
@@ -163,10 +192,10 @@ const OfferDocument = ({ offer, companyInfo, terms }) => {
         </div>
 
         {/* Total */}
-        <div className="flex justify-end mb-12">
-          <div className="flex items-center gap-8">
-            <span className="font-bold text-lg">Total:</span>
-            <span className="font-bold text-lg border-b-2 border-black pb-1">CHF {offer.total}</span>
+        <div className="mb-12 flex flex-col gap-4 md:flex-row md:items-center md:justify-end">
+          <div className="flex items-center gap-6">
+            <span className="text-lg font-bold">Total:</span>
+            <span className="border-b-2 border-black pb-1 text-lg font-bold">CHF {offer.total}</span>
           </div>
         </div>
 
@@ -180,9 +209,9 @@ const OfferDocument = ({ offer, companyInfo, terms }) => {
             <div className="h-2 bg-yellow-400 flex-1"></div>
           </div>
 
-          <div className="flex items-center gap-3 mb-8">
+          <div className="mb-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
             <div className="bg-black p-2 rounded">
-              <svg className="w-12 h-12 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <svg className="w-10 h-10 text-white sm:h-12 sm:w-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M5 17h14v-5l-1.5-4.5h-11L5 12v5z"/>
                 <path d="M5 17v-5l-2 1v4h2z"/>
                 <circle cx="7" cy="17" r="2"/>
@@ -196,7 +225,7 @@ const OfferDocument = ({ offer, companyInfo, terms }) => {
             </h2>
           </div>
 
-          <div className="grid grid-cols-2 gap-8 text-sm">
+          <div className="grid gap-8 text-sm md:grid-cols-2">
             {/* Left Column */}
             <div className="space-y-4">
               <div>
@@ -265,7 +294,7 @@ const OfferDocument = ({ offer, companyInfo, terms }) => {
                 Hiermit erteile ich der Firma Gelbe-Umzüge den obgenannten Auftrag und bestätige, dieses Angebot gelesen zu haben und mit allen Punkten einverstanden zu sein. Mit der Unterschrift bestätigen Sie, dass Sie mit den AGB's und der Offerte einverstanden sind.
               </p>
 
-              <div className="grid grid-cols-2 gap-8 mt-8">
+              <div className="grid gap-8 mt-8 md:grid-cols-2">
                 <div>
                   <p className="font-semibold mb-2">Ort, Datum</p>
                   <div className="border-b-2 border-gray-400 h-12"></div>
@@ -279,9 +308,12 @@ const OfferDocument = ({ offer, companyInfo, terms }) => {
           </div>
 
           {/* Footer */}
-          <div className="text-center text-sm mt-12 pt-4 border-t border-gray-300">
+          <div className="mt-12 border-t border-gray-300 pt-4 text-center text-xs text-gray-700 sm:text-sm">
             <p className="font-semibold">{companyInfo.hauptsitz.company}</p>
-            <p>Tel: 031 552 24 31 / 079 247 00 05  E-Mail: info@gelbe-umzuege.ch</p>
+            <div className="mt-2 flex flex-col gap-1 sm:flex-row sm:justify-center sm:gap-4">
+              <span>Tel: 031 552 24 31 / 079 247 00 05</span>
+              <span>E-Mail: info@gelbe-umzuege.ch</span>
+            </div>
           </div>
         </div>
       </div>

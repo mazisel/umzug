@@ -148,7 +148,7 @@ const AdminSettings = () => {
       </div>
 
       <Tabs defaultValue="company" className="w-full">
-        <TabsList className="grid w-full max-w-2xl grid-cols-4">
+        <TabsList className="grid w-full max-w-2xl grid-cols-2 gap-2 sm:grid-cols-4">
           <TabsTrigger value="company" className="gap-2">
             <Building2 className="w-4 h-4" />
             Firma
@@ -209,7 +209,7 @@ const AdminSettings = () => {
                     placeholder="Gelbe-Umzüge"
                   />
                 </div>
-        <Button onClick={handleCompanyUpdate} disabled={saving}>
+                <Button onClick={handleCompanyUpdate} disabled={saving} className="w-full sm:w-auto">
                   Speichern
                 </Button>
               </div>
@@ -226,8 +226,8 @@ const AdminSettings = () => {
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="space-y-4">
-                <div className="flex items-center gap-4">
-                  <div className="flex-1">
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+                  <div className="w-full flex-1">
                     <Label>Primärfarbe (Gelb)</Label>
                     <Input
                       type="color"
@@ -237,13 +237,13 @@ const AdminSettings = () => {
                     />
                   </div>
                   <div 
-                    className="w-20 h-12 rounded border-2"
+                    className="h-12 w-full rounded border-2 sm:w-20"
                     style={{ backgroundColor: themeData.primaryColor }}
                   />
                 </div>
 
-                <div className="flex items-center gap-4">
-                  <div className="flex-1">
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+                  <div className="w-full flex-1">
                     <Label>Sekundärfarbe (Schwarz)</Label>
                     <Input
                       type="color"
@@ -253,13 +253,13 @@ const AdminSettings = () => {
                     />
                   </div>
                   <div 
-                    className="w-20 h-12 rounded border-2"
+                    className="h-12 w-full rounded border-2 sm:w-20"
                     style={{ backgroundColor: themeData.secondaryColor }}
                   />
                 </div>
 
-                <div className="flex items-center gap-4">
-                  <div className="flex-1">
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+                  <div className="w-full flex-1">
                     <Label>Akzentfarbe (Weiß)</Label>
                     <Input
                       type="color"
@@ -269,15 +269,15 @@ const AdminSettings = () => {
                     />
                   </div>
                   <div 
-                    className="w-20 h-12 rounded border-2"
+                    className="h-12 w-full rounded border-2 sm:w-20"
                     style={{ backgroundColor: themeData.accentColor }}
                   />
                 </div>
               </div>
 
-              <div className="pt-4 border-t">
-                <div className="flex gap-2">
-                  <Button onClick={handleThemeUpdate} disabled={saving}>
+              <div className="border-t pt-4">
+                <div className="flex flex-col gap-2 sm:flex-row">
+                  <Button onClick={handleThemeUpdate} disabled={saving} className="w-full sm:w-auto">
                     Theme speichern
                   </Button>
                   <Button 
@@ -287,6 +287,7 @@ const AdminSettings = () => {
                       secondaryColor: '#000000',
                       accentColor: '#FFFFFF'
                     })}
+                    className="w-full sm:w-auto"
                   >
                     Zurücksetzen
                   </Button>
@@ -304,8 +305,8 @@ const AdminSettings = () => {
               <CardDescription>Konfigurieren Sie die MwSt-Einstellungen</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="flex items-center justify-between">
-                <div>
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <div className="text-left">
                   <Label>MwSt aktiviert</Label>
                   <p className="text-sm text-gray-500">MwSt in Offerten einbeziehen</p>
                 </div>
@@ -335,7 +336,7 @@ const AdminSettings = () => {
                 />
               </div>
 
-              <Button onClick={handleTaxUpdate} disabled={saving}>
+              <Button onClick={handleTaxUpdate} disabled={saving} className="w-full sm:w-auto">
                 MwSt-Einstellungen speichern
               </Button>
             </CardContent>
@@ -350,7 +351,7 @@ const AdminSettings = () => {
               <CardDescription>Konfigurieren Sie SMTP für den E-Mail-Versand</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid gap-4 md:grid-cols-2">
                 <div>
                   <Label>SMTP Host *</Label>
                   <Input
@@ -372,7 +373,7 @@ const AdminSettings = () => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid gap-4 md:grid-cols-2">
                 <div>
                   <Label>SMTP Benutzername *</Label>
                   <Input
@@ -393,7 +394,7 @@ const AdminSettings = () => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid gap-4 md:grid-cols-2">
                 <div>
                   <Label>Absender E-Mail *</Label>
                   <Input
@@ -420,7 +421,7 @@ const AdminSettings = () => {
                 </p>
               </div>
 
-              <Button disabled>
+              <Button disabled className="w-full sm:w-auto">
                 SMTP-Einstellungen speichern (Coming Soon)
               </Button>
             </CardContent>

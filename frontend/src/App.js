@@ -46,49 +46,49 @@ const Home = () => {
       <Header />
       <div className="container mx-auto px-4 py-16">
         {/* Hero Section */}
-        <div className="text-center mb-20 mt-12">
-          <div className="inline-flex items-center gap-4 mb-8">
-            <div className="bg-yellow-500 p-6 rounded-2xl shadow-2xl transform hover:scale-105 transition-transform">
-              <Package className="w-20 h-20 text-black" />
+        <div className="mt-12 mb-20 text-center">
+          <div className="mb-8 inline-flex flex-wrap items-center justify-center gap-4">
+            <div className="bg-yellow-500 p-5 rounded-2xl shadow-2xl transform hover:scale-105 transition-transform sm:p-6">
+              <Package className="w-16 h-16 text-black sm:w-20 sm:h-20" />
             </div>
           </div>
-          <h1 className="text-7xl font-bold mb-6 bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">
+          <h1 className="mb-6 text-4xl font-bold bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent sm:text-5xl md:text-6xl lg:text-7xl">
             {t('home.title')}
           </h1>
-          <p className="text-3xl text-gray-300 mb-4 font-light">{t('home.subtitle')}</p>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+          <p className="mb-4 text-xl font-light text-gray-300 sm:text-2xl lg:text-3xl">{t('home.subtitle')}</p>
+          <p className="mx-auto max-w-3xl text-base leading-relaxed text-gray-400 sm:text-lg lg:text-xl">
             {t('home.description')}
           </p>
         </div>
 
         {/* Features */}
-        <div className="grid md:grid-cols-3 gap-8 mb-20 max-w-6xl mx-auto">
-          <div className="bg-gray-800/50 backdrop-blur-sm p-8 rounded-xl border border-gray-700 hover:border-yellow-500 transition-all duration-300 hover:shadow-2xl hover:shadow-yellow-500/20 transform hover:-translate-y-2">
-            <div className="bg-yellow-500 w-16 h-16 rounded-xl flex items-center justify-center mb-6 shadow-lg">
-              <FileText className="w-8 h-8 text-black" />
+        <div className="mx-auto mb-20 grid max-w-6xl grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
+          <div className="rounded-xl border border-gray-700 bg-gray-800/50 p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-2 hover:border-yellow-500 hover:shadow-2xl hover:shadow-yellow-500/20 sm:p-8">
+            <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-yellow-500 shadow-lg sm:h-16 sm:w-16">
+              <FileText className="h-7 w-7 text-black sm:h-8 sm:w-8" />
             </div>
-            <h3 className="text-2xl font-semibold mb-3">Professionelles Layout</h3>
-            <p className="text-gray-400 leading-relaxed">
+            <h3 className="mb-3 text-xl font-semibold sm:text-2xl">Professionelles Layout</h3>
+            <p className="leading-relaxed text-gray-400">
               Exakt formatierte Offerten nach Schweizer Standard mit allen erforderlichen Angaben, AGB und Unterschriftsbereich
             </p>
           </div>
 
-          <div className="bg-gray-800/50 backdrop-blur-sm p-8 rounded-xl border border-gray-700 hover:border-yellow-500 transition-all duration-300 hover:shadow-2xl hover:shadow-yellow-500/20 transform hover:-translate-y-2">
-            <div className="bg-yellow-500 w-16 h-16 rounded-xl flex items-center justify-center mb-6 shadow-lg">
-              <Plus className="w-8 h-8 text-black" />
+          <div className="rounded-xl border border-gray-700 bg-gray-800/50 p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-2 hover:border-yellow-500 hover:shadow-2xl hover:shadow-yellow-500/20 sm:p-8">
+            <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-yellow-500 shadow-lg sm:h-16 sm:w-16">
+              <Plus className="h-7 w-7 text-black sm:h-8 sm:w-8" />
             </div>
-            <h3 className="text-2xl font-semibold mb-3">Einfache Erstellung</h3>
-            <p className="text-gray-400 leading-relaxed">
+            <h3 className="mb-3 text-xl font-semibold sm:text-2xl">Einfache Erstellung</h3>
+            <p className="leading-relaxed text-gray-400">
               Intuitive Formulare für schnelle Offertenerstellung mit automatischer Preisberechnung und Speicherung
             </p>
           </div>
 
-          <div className="bg-gray-800/50 backdrop-blur-sm p-8 rounded-xl border border-gray-700 hover:border-yellow-500 transition-all duration-300 hover:shadow-2xl hover:shadow-yellow-500/20 transform hover:-translate-y-2">
-            <div className="bg-yellow-500 w-16 h-16 rounded-xl flex items-center justify-center mb-6 shadow-lg">
-              <LayoutDashboard className="w-8 h-8 text-black" />
+          <div className="rounded-xl border border-gray-700 bg-gray-800/50 p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-2 hover:border-yellow-500 hover:shadow-2xl hover:shadow-yellow-500/20 sm:p-8">
+            <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-yellow-500 shadow-lg sm:h-16 sm:w-16">
+              <LayoutDashboard className="h-7 w-7 text-black sm:h-8 sm:w-8" />
             </div>
-            <h3 className="text-2xl font-semibold mb-3">Admin Panel</h3>
-            <p className="text-gray-400 leading-relaxed">
+            <h3 className="mb-3 text-xl font-semibold sm:text-2xl">Admin Panel</h3>
+            <p className="leading-relaxed text-gray-400">
               Vollständiges Verwaltungspanel mit Dashboard, Statistiken, Suche und Bearbeitungsfunktionen
             </p>
           </div>
@@ -115,14 +115,14 @@ const Home = () => {
               {t('home.adminPanel')}
             </Button>
           </div>
-          <p className="text-gray-500 text-sm">{t('home.demoLogin')}</p>
+          <p className="text-sm text-gray-500">{t('home.demoLogin')}</p>
         </div>
 
         {/* Footer */}
-        <div className="mt-32 text-center text-gray-500 text-sm border-t border-gray-800 pt-8">
-          <p className="text-lg font-semibold mb-2">Gelbe-Umzüge Offerten Generator</p>
-          <p>Tel: 031 557 24 31 / 079 247 00 05 • info@gelbe-umzuege.ch</p>
-          <p className="mt-4 text-gray-600">© 2024 Gelbe-Umzüge. Alle Rechte vorbehalten.</p>
+        <div className="mt-24 border-t border-gray-800 pt-8 text-center text-sm text-gray-500 sm:mt-32">
+          <p className="mb-2 text-base font-semibold sm:text-lg">Gelbe-Umzüge Offerten Generator</p>
+          <p className="text-xs sm:text-sm">Tel: 031 557 24 31 / 079 247 00 05 • info@gelbe-umzuege.ch</p>
+          <p className="mt-4 text-xs text-gray-600 sm:text-sm">© 2024 Gelbe-Umzüge. Alle Rechte vorbehalten.</p>
         </div>
       </div>
     </div>

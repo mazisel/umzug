@@ -82,7 +82,7 @@ const AdminOffers = () => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
           <h1 className="text-3xl font-bold text-gray-900">Alle Offerten</h1>
           <p className="text-gray-600 mt-2">
@@ -91,7 +91,7 @@ const AdminOffers = () => {
         </div>
         <Button
           onClick={() => navigate('/offerte')}
-          className="bg-yellow-500 hover:bg-yellow-600 text-black gap-2"
+          className="bg-yellow-500 hover:bg-yellow-600 text-black gap-2 w-full md:w-auto"
         >
           <Plus className="w-4 h-4" />
           Neue Offerte
@@ -101,8 +101,8 @@ const AdminOffers = () => {
       {/* Search and Filter */}
       <Card>
         <CardContent className="pt-6">
-          <div className="flex gap-4">
-            <div className="flex-1 relative">
+          <div className="flex flex-col gap-4 sm:flex-row">
+            <div className="relative flex-1">
               <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
               <Input
                 placeholder="Suchen nach Offert-Nr., Name, E-Mail..."
@@ -111,7 +111,7 @@ const AdminOffers = () => {
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
-            <Button variant="outline" className="gap-2">
+            <Button variant="outline" className="gap-2 w-full sm:w-auto">
               <Filter className="w-4 h-4" />
               Filter
             </Button>
@@ -131,7 +131,7 @@ const AdminOffers = () => {
               {!searchTerm && (
                 <Button
                   onClick={() => navigate('/offerte')}
-                  className="bg-yellow-500 hover:bg-yellow-600 text-black gap-2"
+                  className="bg-yellow-500 hover:bg-yellow-600 text-black gap-2 w-full sm:w-auto"
                 >
                   <Plus className="w-4 h-4" />
                   Erste Offerte erstellen
@@ -145,19 +145,19 @@ const AdminOffers = () => {
           {filteredOffers.map((offer) => (
             <Card key={offer._id} className="hover:shadow-lg transition-all">
               <CardContent className="p-6">
-                <div className="flex items-start justify-between">
-                  <div className="flex gap-4 flex-1">
-                    <div className="bg-yellow-100 p-3 rounded-lg">
+                <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+                  <div className="flex flex-1 flex-col gap-4 sm:flex-row">
+                    <div className="rounded-lg bg-yellow-100 p-3">
                       <FileText className="w-8 h-8 text-yellow-600" />
                     </div>
                     <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-2">
-                        <h3 className="text-xl font-bold">
+                      <div className="mb-2 flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3">
+                        <h3 className="text-xl font-bold leading-tight">
                           {offer.customer.firstName} {offer.customer.lastName}
                         </h3>
                         <Badge variant="secondary">#{offer.offerNumber}</Badge>
                       </div>
-                      <div className="grid grid-cols-2 gap-4 text-sm text-gray-600">
+                      <div className="grid gap-4 text-sm text-gray-600 sm:grid-cols-2">
                         <div>
                           <p className="font-semibold text-gray-900">Kontakt</p>
                           <p>{offer.customer.email}</p>
@@ -181,17 +181,17 @@ const AdminOffers = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="flex flex-col items-end gap-4">
-                    <div className="text-right">
+                  <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between lg:flex-col lg:items-end lg:justify-start">
+                    <div className="text-left sm:text-right">
                       <p className="text-2xl font-bold text-gray-900">CHF {offer.pricing?.total?.toFixed(2) || '0.00'}</p>
                       <p className="text-sm text-gray-500">Erstellt: {new Date(offer.createdAt).toLocaleDateString('de-CH')}</p>
                     </div>
-                    <div className="flex gap-2">
+                    <div className="flex flex-wrap gap-2">
                       <Button
                         onClick={() => navigate(`/admin/offers/${offer._id}`)}
                         variant="outline"
                         size="sm"
-                        className="gap-2"
+                        className="gap-2 w-full sm:w-auto"
                       >
                         <Eye className="w-4 h-4" />
                         Anzeigen
@@ -200,7 +200,7 @@ const AdminOffers = () => {
                         onClick={() => setDeleteId(offer._id)}
                         variant="destructive"
                         size="sm"
-                        className="gap-2"
+                        className="gap-2 w-full sm:w-auto"
                       >
                         <Trash2 className="w-4 h-4" />
                         Löschen

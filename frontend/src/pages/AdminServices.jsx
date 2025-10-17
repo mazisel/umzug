@@ -161,12 +161,12 @@ const AdminServices = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
           <h1 className="text-3xl font-bold text-gray-900">Zusatzleistungen</h1>
           <p className="text-gray-600 mt-2">Verwalten Sie Ihre zusätzlichen Services</p>
         </div>
-        <Button onClick={handleCreate} className="bg-yellow-500 hover:bg-yellow-600 text-black gap-2">
+        <Button onClick={handleCreate} className="bg-yellow-500 hover:bg-yellow-600 text-black gap-2 w-full md:w-auto">
           <Plus className="w-4 h-4" />
           Neuer Service
         </Button>
@@ -176,13 +176,13 @@ const AdminServices = () => {
         {services.map((service) => (
           <Card key={service._id} className="hover:shadow-lg transition-all">
             <CardContent className="p-6">
-              <div className="flex items-start justify-between">
-                <div className="flex gap-4 flex-1">
+              <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
+                <div className="flex flex-1 flex-col gap-4 sm:flex-row">
                   <div className="bg-blue-100 p-3 rounded-lg">
                     <Sparkles className="w-8 h-8 text-blue-600" />
                   </div>
                   <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-2">
+                    <div className="mb-2 flex flex-wrap items-center gap-2">
                       <h3 className="text-xl font-bold">{service.name.de}</h3>
                       <Badge variant={service.active ? "default" : "secondary"}>
                         {service.active ? 'Aktiv' : 'Inaktiv'}
@@ -191,7 +191,7 @@ const AdminServices = () => {
                       <Badge>{categories.find(c => c.categoryId === service.categoryId)?.name.de || service.categoryId}</Badge>
                     </div>
                     <p className="text-gray-600 mb-3">{service.description.de}</p>
-                    <div className="grid grid-cols-3 gap-4 text-sm">
+                    <div className="grid gap-4 text-sm sm:grid-cols-2 lg:grid-cols-3">
                       <div>
                         <p className="font-semibold text-gray-900">Service-ID</p>
                         <p className="text-gray-600">{service.serviceId}</p>
@@ -209,12 +209,12 @@ const AdminServices = () => {
                     </div>
                   </div>
                 </div>
-                <div className="flex gap-2">
+                <div className="flex flex-wrap gap-2">
                   <Button
                     onClick={() => handleEdit(service)}
                     variant="outline"
                     size="sm"
-                    className="gap-2"
+                    className="gap-2 w-full sm:w-auto"
                   >
                     <Edit className="w-4 h-4" />
                     Bearbeiten
@@ -223,7 +223,7 @@ const AdminServices = () => {
                     onClick={() => handleDelete(service._id)}
                     variant="destructive"
                     size="sm"
-                    className="gap-2"
+                    className="gap-2 w-full sm:w-auto"
                   >
                     <Trash2 className="w-4 h-4" />
                     Löschen
@@ -248,7 +248,7 @@ const AdminServices = () => {
           </DialogHeader>
 
           <div className="space-y-4 py-4">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid gap-4 md:grid-cols-2">
               <div>
                 <Label>Service-ID *</Label>
                 <Input
@@ -274,7 +274,7 @@ const AdminServices = () => {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid gap-4 md:grid-cols-2">
               <div>
                 <Label>Name (Deutsch) *</Label>
                 <Input
@@ -302,7 +302,7 @@ const AdminServices = () => {
               />
             </div>
 
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
               <div>
                 <Label>Preistyp</Label>
                 <select
@@ -336,7 +336,7 @@ const AdminServices = () => {
               )}
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid gap-4 md:grid-cols-2">
               <div>
                 <Label>Reihenfolge</Label>
                 <Input

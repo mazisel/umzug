@@ -139,12 +139,12 @@ const AdminDashboard = () => {
       {/* Recent Offers */}
       <Card>
         <CardHeader>
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
             <CardTitle>Neueste Offerten</CardTitle>
             <Button
               onClick={() => navigate('/admin/offers')}
               variant="outline"
-              className="gap-2"
+              className="gap-2 w-full md:w-auto"
             >
               <Eye className="w-4 h-4" />
               Alle anzeigen
@@ -158,7 +158,7 @@ const AdminDashboard = () => {
               <p className="text-gray-500 mb-4">Noch keine Offerten erstellt</p>
               <Button
                 onClick={() => navigate('/offerte')}
-                className="bg-yellow-500 hover:bg-yellow-600 text-black gap-2"
+                className="bg-yellow-500 hover:bg-yellow-600 text-black gap-2 w-full sm:w-auto"
               >
                 <Plus className="w-4 h-4" />
                 Erste Offerte erstellen
@@ -169,7 +169,7 @@ const AdminDashboard = () => {
               {recentOffers.map((offer) => (
                 <div
                   key={offer._id}
-                  className="flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50 transition-colors cursor-pointer"
+                  className="flex flex-col gap-4 border rounded-lg p-4 transition-colors hover:bg-gray-50 cursor-pointer sm:flex-row sm:items-center sm:justify-between"
                   onClick={() => navigate(`/admin/offers/${offer._id}`)}
                 >
                   <div className="flex-1">
@@ -187,8 +187,8 @@ const AdminDashboard = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="text-right">
-                    <p className="font-bold text-lg">CHF {offer.pricing?.total?.toFixed(2) || '0.00'}</p>
+                  <div className="text-left sm:text-right">
+                    <p className="text-lg font-bold">CHF {offer.pricing?.total?.toFixed(2) || '0.00'}</p>
                     <p className="text-sm text-gray-500">{offer.serviceDetails?.movingDate || 'N/A'}</p>
                   </div>
                 </div>
@@ -207,7 +207,7 @@ const AdminDashboard = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <Button
               onClick={() => navigate('/offerte')}
-              className="bg-yellow-500 hover:bg-yellow-600 text-black h-20 text-lg gap-3"
+              className="bg-yellow-500 hover:bg-yellow-600 text-black h-20 text-lg gap-3 w-full"
             >
               <Plus className="w-6 h-6" />
               Neue Offerte
@@ -215,7 +215,7 @@ const AdminDashboard = () => {
             <Button
               onClick={() => navigate('/admin/offers')}
               variant="outline"
-              className="h-20 text-lg gap-3"
+              className="h-20 text-lg gap-3 w-full"
             >
               <FileText className="w-6 h-6" />
               Alle Offerten
@@ -223,7 +223,7 @@ const AdminDashboard = () => {
             <Button
               onClick={() => navigate('/admin/settings')}
               variant="outline"
-              className="h-20 text-lg gap-3"
+              className="h-20 text-lg gap-3 w-full"
             >
               <Users className="w-6 h-6" />
               Einstellungen
